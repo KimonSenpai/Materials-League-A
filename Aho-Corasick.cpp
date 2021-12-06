@@ -19,8 +19,10 @@ struct Node {
 
 Node* build(vector<string> dict) {
     Node* root = new Node;
+
     for (auto word : dict) {
         auto node = root;
+        
         for (char c : word) {
             if (node->go.count(c)) {
                 node = node->go[c];
@@ -33,6 +35,7 @@ Node* build(vector<string> dict) {
         }
         node->ans.push_back(word);
     }
+
     return root;
 }
 
@@ -49,6 +52,7 @@ void make_eps(Node* root) {
     for (int i = 0; i < vert.size(); ++i) {
         auto node = vert[i]->par;
         auto c = vert[i]->let;
+
         do {
             node = node->eps;
         } while (node != root && !node->go.count(c));
